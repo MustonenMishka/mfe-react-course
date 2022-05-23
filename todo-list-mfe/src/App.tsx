@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 import './App.css';
 import { ITodo } from './types';
-import TodoItem from './components/TodoItem/TodoItem';
 import Spinner from './components/Spinner/Spinner';
+import TodoList from './components/TodoList/TodoList';
 
 const MOCK: ITodo[] = [
   {
@@ -35,14 +35,10 @@ const App: React.FC = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="TodoListWrapper">
-          <h3 className="TodosCounter">Todos count: {todos.length}</h3>
-          <ul className="TodoList">
-            {todos.map(todo => (
-              <TodoItem key={todo.id} {...todo} />
-            ))}
-          </ul>
-        </div>
+        <>
+          <TodoList todos={todos} />
+          <button className="AddTodoBtn">Add Todo</button>
+        </>
       )}
     </div>
   );
