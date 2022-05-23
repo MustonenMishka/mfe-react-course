@@ -1,0 +1,18 @@
+.TodoListMFEWrapper {
+    margin: 0 auto;
+    max-width: 30rem;
+}
+
+.TodosCounter {
+    font-size: 2rem;
+    margin-top: 0;
+}
+
+.TodoList {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
