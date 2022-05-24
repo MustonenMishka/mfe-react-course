@@ -4,19 +4,23 @@ import Modal from 'react-modal';
 
 import './App.css';
 import { ITodo } from './types';
+import { useActions, useTypedSelector } from './state';
+import { getIsModalOpen } from './state/selectors';
 
 const App: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const isModalOpen = useTypedSelector(getIsModalOpen);
+  const { toggleModalOpenAC } = useActions();
+
   const [titleValue, setTitleValue] = useState<string>('');
   const [descValue, setDescValue] = useState<string>('');
 
   const handleOpenModal = () => {
-    setIsModalOpen(true);
+    toggleModalOpenAC(true);
   };
   const handleCloseModal = () => {
     setTitleValue('');
     setDescValue('');
-    setIsModalOpen(false);
+    toggleModalOpenAC(false);
   };
 
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +51,7 @@ const App: React.FC = () => {
   return (
     <>
       <button onClick={handleOpenModal}>Open Modal</button>
-      <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} className="AddTodoModal">
+      <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} className="AddTodoModal" ariaHideApp={false}>
         <h4 className="ModalTitle">Let's add a new todo!</h4>
         <form className="AddTodoForm" onSubmit={handleSubmitTodo}>
           <input
