@@ -1,34 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios, { AxiosResponse } from 'axios';
 
 import './App.css';
 import { ITodo } from './types';
 import Spinner from './components/Spinner/Spinner';
 import TodoList from './components/TodoList/TodoList';
 
-const MOCK: ITodo[] = [
-  {
-    id: '1',
-    ts: 1653304363000,
-    title: 'Buy cheese',
-    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
-  },
-  {
-    id: '2',
-    ts: 1653304558000,
-    title: 'Slice salami',
-    desc: 'Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.',
-  },
-  {
-    id: '3',
-    ts: 1653304570000,
-    title: 'Cook pizza',
-    desc: 'In voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit.',
-  },
-];
-
 const App: React.FC = () => {
-  const [todos, setTodos] = useState<ITodo[]>(MOCK);
+  const [todos, setTodos] = useState<ITodo[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    const fetchTodos = async () => {
+      setIsLoading(true);
+      try {
+        const getTodosResponse: AxiosResponse<ITodo[]> = await axios.get('http://localhost:5000/todos');
+        setTodos(getTodosResponse.data);
+      } catch (e) {
+        console.log('Error fetching todos', e);
+      }
+      setIsLoading(false);
+    };
+
+    fetchTodos();
+  }, []);
 
   return (
     <div className="TodoListMFEWrapper">
