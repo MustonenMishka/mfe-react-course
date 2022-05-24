@@ -1,0 +1,35 @@
+.AddTodoModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid lightslategrey;
+    border-radius: 8px;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+    padding: 1rem;
+}
+
+.ModalTitle {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+.AddTodoForm {
+    display: flex;
+    flex-direction: column;
+    row-gap: .6rem;
+}
+
+.InputField {
+    padding: .5rem;
+    font-size: 1rem;
+}
+
+.SubmitTodoBtn {
+    padding: .6rem .8rem;
+    align-self: center;
+    margin-top: 1rem;
+    color: darkgreen;
+    font-weight: bold;
+}
