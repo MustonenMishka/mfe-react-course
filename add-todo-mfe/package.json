@@ -8,8 +8,10 @@
     "@types/react-dom": "^18.0.4",
     "@types/react-modal": "^3.13.1",
     "axios": "^0.27.2",
+    "customize-cra": "^1.0.0",
     "prettier": "^2.6.2",
     "react": "^18.1.0",
+    "react-app-rewired": "^2.2.1",
     "react-dom": "^18.1.0",
     "react-modal": "^3.15.1",
     "react-redux": "^8.0.2",
@@ -20,7 +22,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-app-rewired build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
