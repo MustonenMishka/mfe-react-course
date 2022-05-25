@@ -14,9 +14,6 @@ const App: React.FC = () => {
   const [titleValue, setTitleValue] = useState<string>('');
   const [descValue, setDescValue] = useState<string>('');
 
-  const handleOpenModal = () => {
-    toggleModalOpenAC(true);
-  };
   const handleCloseModal = () => {
     setTitleValue('');
     setDescValue('');
@@ -49,31 +46,28 @@ const App: React.FC = () => {
   };
 
   return (
-    <>
-      <button onClick={handleOpenModal}>Open Modal</button>
-      <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} className="AddTodoModal" ariaHideApp={false}>
-        <h4 className="ModalTitle">Let's add a new todo!</h4>
-        <form className="AddTodoForm" onSubmit={handleSubmitTodo}>
-          <input
-            required
-            className="InputField"
-            placeholder="Title"
-            type="text"
-            value={titleValue}
-            onChange={handleTitleChange}
-          />
-          <input
-            required
-            className="InputField"
-            placeholder="Description"
-            type="text"
-            value={descValue}
-            onChange={handleDescChange}
-          />
-          <button className="SubmitTodoBtn">Submit</button>
-        </form>
-      </Modal>
-    </>
+    <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} className="AddTodoModal" ariaHideApp={false}>
+      <h4 className="ModalTitle">Let's add a new todo!</h4>
+      <form className="AddTodoForm" onSubmit={handleSubmitTodo}>
+        <input
+          required
+          className="InputField"
+          placeholder="Title"
+          type="text"
+          value={titleValue}
+          onChange={handleTitleChange}
+        />
+        <input
+          required
+          className="InputField"
+          placeholder="Description"
+          type="text"
+          value={descValue}
+          onChange={handleDescChange}
+        />
+        <button className="SubmitTodoBtn">Submit</button>
+      </form>
+    </Modal>
   );
 };
 

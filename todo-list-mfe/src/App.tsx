@@ -5,6 +5,7 @@ import './App.css';
 import { ITodo } from './types';
 import Spinner from './components/Spinner/Spinner';
 import TodoList from './components/TodoList/TodoList';
+import { toggleAddTodoModal } from './globalStoreUtils';
 
 const App: React.FC = () => {
   const [todos, setTodos] = useState<ITodo[]>([]);
@@ -25,6 +26,10 @@ const App: React.FC = () => {
     fetchTodos();
   }, []);
 
+  const handleAddTodo = () => {
+    toggleAddTodoModal(true);
+  };
+
   return (
     <div className="TodoListMFEWrapper">
       {isLoading ? (
@@ -32,7 +37,9 @@ const App: React.FC = () => {
       ) : (
         <>
           <TodoList todos={todos} />
-          <button className="AddTodoBtn">Add Todo</button>
+          <button className="AddTodoBtn" onClick={handleAddTodo}>
+            Add Todo
+          </button>
         </>
       )}
     </div>
