@@ -1,11 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
 import './index.css';
 import App from './App';
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-);
+class TodoListMFE extends HTMLElement {
+  private root: ReactDOM.Root;
+
+  constructor() {
+    super();
+    this.root = ReactDOM.createRoot(this);
+  }
+
+  connectedCallback() {
+    this.root.render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>,
+    );
+  }
+
+  disconnectedCallback() {
+    this.root.unmount();
+  }
+}
+
+customElements.define('todo-list', TodoListMFE);
