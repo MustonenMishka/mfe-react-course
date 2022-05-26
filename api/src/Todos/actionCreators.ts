@@ -71,8 +71,8 @@ export const addTodoThunk = (addTodoFormData: IAddTodoFormData) => {
         ts: getTimestamp(),
       };
       await axiosInst.post('/todos', newTodo);
-
       dispatch(addTodoAcceptedAC());
+      await getTodosThunk()(dispatch, getState);
     } catch (e) {
       dispatch(addTodoDeniedAC());
       console.log('Error adding todo', e);

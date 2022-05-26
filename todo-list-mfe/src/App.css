@@ -8,3 +8,7 @@
     margin: 2rem auto 0 auto;
     color: dodgerblue;
 }
+
+.TodoListMFEWrapper .SpinnerWrapper {
+    height: 100vh;
+}

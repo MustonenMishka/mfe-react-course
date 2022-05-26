@@ -1,22 +1,28 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
-import axios from 'axios';
 import Modal from 'react-modal';
 
 import './App.css';
-import { ITodo } from './types';
+import { IAddTodoFormData, RequestStatusEnum } from './types';
 import { useActions, useTypedSelector } from './state';
-import { getIsModalOpen } from './state/selectors';
+import { getAddTodoStatus, getIsModalOpen } from './state/selectors';
+import { addTodo, clearAddTodoStatus } from './globalStoreUtils';
+import Spinner from './components/Spinner/Spinner';
 
 const App: React.FC = () => {
   const isModalOpen = useTypedSelector(getIsModalOpen);
+  const addTodoStatus = useTypedSelector(getAddTodoStatus);
+
   const { toggleModalOpenAC } = useActions();
 
   const [titleValue, setTitleValue] = useState<string>('');
   const [descValue, setDescValue] = useState<string>('');
 
+  const isLoading: boolean = addTodoStatus === RequestStatusEnum.LOADING;
+
   const handleCloseModal = () => {
     setTitleValue('');
     setDescValue('');
+    clearAddTodoStatus();
     toggleModalOpenAC(false);
   };
 
@@ -30,43 +36,45 @@ const App: React.FC = () => {
   const handleSubmitTodo = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
-      const todo: ITodo = {
-        id: Math.floor(Math.random() * 1000).toString(),
-        title: titleValue,
-        desc: descValue,
-        ts: Date.now(),
-      };
-      await axios.post('http://localhost:5000/todos', todo);
-
-      handleCloseModal();
-    } catch (e) {
-      console.log('Error adding todo', e);
-    }
+    const addTodoFormData: IAddTodoFormData = {
+      title: titleValue,
+      desc: descValue,
+    };
+    addTodo(addTodoFormData);
   };
+
+  if (addTodoStatus === RequestStatusEnum.ACCEPTED || addTodoStatus === RequestStatusEnum.DENIED) {
+    handleCloseModal();
+  }
 
   return (
     <Modal isOpen={isModalOpen} onRequestClose={handleCloseModal} className="AddTodoModal" ariaHideApp={false}>
-      <h4 className="ModalTitle">Let's add a new todo!</h4>
-      <form className="AddTodoForm" onSubmit={handleSubmitTodo}>
-        <input
-          required
-          className="InputField"
-          placeholder="Title"
-          type="text"
-          value={titleValue}
-          onChange={handleTitleChange}
-        />
-        <input
-          required
-          className="InputField"
-          placeholder="Description"
-          type="text"
-          value={descValue}
-          onChange={handleDescChange}
-        />
-        <button className="SubmitTodoBtn">Submit</button>
-      </form>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          <h4 className="ModalTitle">Let's add a new todo!</h4>
+          <form className="AddTodoForm" onSubmit={handleSubmitTodo}>
+            <input
+              required
+              className="InputField"
+              placeholder="Title"
+              type="text"
+              value={titleValue}
+              onChange={handleTitleChange}
+            />
+            <input
+              required
+              className="InputField"
+              placeholder="Description"
+              type="text"
+              value={descValue}
+              onChange={handleDescChange}
+            />
+            <button className="SubmitTodoBtn">Submit</button>
+          </form>
+        </>
+      )}
     </Modal>
   );
 };

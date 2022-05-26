@@ -1,4 +1,8 @@
 .AddTodoModal {
+    height: 14rem;
+    width: 24rem;
+    display: flex;
+    flex-direction: column;
     position: fixed;
     top: 50%;
     left: 50%;
@@ -8,18 +12,21 @@
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
     padding: 1rem;
     background-color: powderblue;
+    outline: none;
 }
 
 .ModalTitle {
     margin-top: 0;
     margin-bottom: 1.5rem;
     font-size: 2rem;
+    align-self: center;
 }
 
 .AddTodoForm {
     display: flex;
     flex-direction: column;
     row-gap: .6rem;
+    flex-grow: 1;
 }
 
 .InputField {
@@ -28,9 +35,14 @@
 }
 
 .SubmitTodoBtn {
+    display: block;
     padding: .6rem .8rem;
     align-self: center;
-    margin-top: 1rem;
     color: darkgreen;
     font-weight: bold;
+    margin-top: auto;
+}
+
+.AddTodoModal .SpinnerWrapper {
+    height: 100%;
 }
