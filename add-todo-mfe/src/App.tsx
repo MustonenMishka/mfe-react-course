@@ -10,13 +10,12 @@ import Spinner from './components/Spinner/Spinner';
 
 const App: React.FC = () => {
   const isModalOpen = useTypedSelector(getIsModalOpen);
-  const addTodoStatus = useTypedSelector(getAddTodoStatus);
-
   const { toggleModalOpenAC } = useActions();
 
   const [titleValue, setTitleValue] = useState<string>('');
   const [descValue, setDescValue] = useState<string>('');
 
+  const addTodoStatus = useTypedSelector(getAddTodoStatus);
   const isLoading: boolean = addTodoStatus === RequestStatusEnum.LOADING;
 
   const handleCloseModal = () => {
