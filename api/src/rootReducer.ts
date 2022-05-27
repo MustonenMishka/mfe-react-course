@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
-import TodosReducer from './Todos/reducer';
+import todosReducer from './Todos/reducer';
+import errorReducer from './Error/reducer';
 
 const rootReducer = combineReducers({
-  Todos: TodosReducer,
+  Todos: todosReducer,
+  Error: errorReducer,
 });
 export default rootReducer;
 

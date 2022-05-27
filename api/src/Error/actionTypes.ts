@@ -1,0 +1,6 @@
+export enum ErrorActionTypeEnum {
+  API_ERROR_SET = 'API/ERROR/SET',
+  API_ERROR_CLEAR = 'API/ERROR/CLEAR',
+
+  API_ERROR_IMITATE = 'API/ERROR/IMITATE',
+}

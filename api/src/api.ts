@@ -5,13 +5,17 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './rootReducer';
 import apiMiddleware from './APIMiddleware';
 import { TodosActionTypeEnum } from './Todos/actionTypes';
+import { ErrorActionTypeEnum } from './Error/actionTypes';
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(apiMiddleware)));
 
-const globalStore = GlobalStore.Get();
+export const globalStore = GlobalStore.Get();
 globalStore.RegisterStore('API', store);
 globalStore.RegisterGlobalActions('API', [
   TodosActionTypeEnum.API_TODOS_GET,
   TodosActionTypeEnum.API_TODO_ADD,
   TodosActionTypeEnum.API_TODOS_CLEAR_ADD_STATUS,
+
+  ErrorActionTypeEnum.API_ERROR_CLEAR,
+  ErrorActionTypeEnum.API_ERROR_IMITATE,
 ]);
