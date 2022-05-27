@@ -1,7 +1,8 @@
-import { IApiClearErrorAction, IApiSetErrorAction } from './actions';
+import { Dispatch } from 'redux';
+
+import { IApiSetErrorAction } from './actions';
 import { ErrorActionTypeEnum } from './actionTypes';
 import { INetworkError } from './types';
-import { Dispatch } from 'redux';
 import { TodosAction } from '../Todos/actions';
 import { RootState } from '../rootReducer';
 import { axiosInst } from '../axiosInstance';
