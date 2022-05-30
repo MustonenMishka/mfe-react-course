@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 import { IApiState, INetworkError } from '../types';
 import { clearErrorState, globalStore } from '../globalStoreUtils';
@@ -8,8 +8,10 @@ const ErrorPage: React.FC = () => {
   const { code, type }: INetworkError = (globalStore.GetPartnerState('API') as IApiState).Error;
 
   useEffect(() => {
-    return clearErrorState
-  })
+    return clearErrorState;
+  });
+
+  if (!code) return <Navigate to="/" />;
 
   return (
     <div className="ErrorPageWrapper">
