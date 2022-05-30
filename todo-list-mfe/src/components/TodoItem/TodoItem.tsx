@@ -2,8 +2,9 @@ import React from 'react';
 
 import './TodoItem.css';
 import { ITodo } from '../../types';
+import { deleteTodo } from '../../globalStoreUtils';
 
-const TodoItem: React.FC<ITodo> = ({ ts, title, desc }) => {
+const TodoItem: React.FC<ITodo> = ({ ts, title, desc, id }) => {
   const date: Date = new Date(ts);
   const dateFormatOptions: Intl.DateTimeFormatOptions = {
     month: 'long',
@@ -14,6 +15,10 @@ const TodoItem: React.FC<ITodo> = ({ ts, title, desc }) => {
   const isoDateString = date.toISOString();
   const readableDateString = date.toLocaleDateString('en-Us', dateFormatOptions);
 
+  const handleDelete = () => {
+    deleteTodo(id);
+  };
+
   return (
     <li className="TodoItemWrapper">
       <div className="TodoHeader">
@@ -23,7 +28,9 @@ const TodoItem: React.FC<ITodo> = ({ ts, title, desc }) => {
         </time>
       </div>
       <p className="TodoDesc">{desc}</p>
-      <button className="DeleteItemBtn">Delete</button>
+      <button className="DeleteItemBtn" onClick={handleDelete}>
+        Delete
+      </button>
     </li>
   );
 };

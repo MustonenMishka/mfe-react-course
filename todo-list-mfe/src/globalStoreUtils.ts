@@ -15,3 +15,10 @@ export const fetchTodos = () => {
     payload: null,
   });
 };
+
+export const deleteTodo = (id: string) => {
+  globalStore.DispatchGlobalAction('TodoListMFE', {
+    type: 'API/TODOS/DELETE',
+    payload: id,
+  });
+};

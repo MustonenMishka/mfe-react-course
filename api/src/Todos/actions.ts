@@ -32,6 +32,11 @@ export interface IApiClearAddTodoStatusAction {
   type: TodosActionTypeEnum.API_TODOS_CLEAR_ADD_STATUS;
 }
 
+export interface IApiDeleteTodoAction {
+  type: TodosActionTypeEnum.API_TODO_DELETE;
+  payload: string;
+}
+
 export type TodosAction =
   | IApiGetTodosAction
   | IGetTodosStartAction
@@ -41,4 +46,5 @@ export type TodosAction =
   | IAddTodoStartAction
   | IAddTodoAcceptedAction
   | IAddTodoDeniedAction
-  | IApiClearAddTodoStatusAction;
+  | IApiClearAddTodoStatusAction
+  | IApiDeleteTodoAction;

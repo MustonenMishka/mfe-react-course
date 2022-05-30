@@ -6,8 +6,6 @@ import ErrorPage from './pages/ErrorPage';
 import HomePage from './pages/HomePage';
 
 const App: React.FC = () => {
-  console.log('render');
-
   return (
     <Routes>
       <Route path="/error" element={<ErrorPage />} />

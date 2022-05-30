@@ -79,3 +79,16 @@ export const addTodoThunk = (addTodoFormData: IAddTodoFormData) => {
     }
   };
 };
+
+export const deleteTodoThunk = (id: string) => {
+  return async (dispatch: Dispatch<TodosAction>, getState: () => RootState) => {
+    dispatch(getTodosStartAC());
+    try {
+      await axiosInst.delete(`/todos/${id}`);
+      await getTodosThunk()(dispatch, getState);
+    } catch (e) {
+      dispatch(getTodosDeniedAC());
+      console.log('Error deleting todo', e);
+    }
+  };
+};

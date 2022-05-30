@@ -1,10 +1,10 @@
 import axios, { AxiosError } from 'axios';
 import { push } from 'redux-first-history';
+import { IAction } from 'redux-micro-frontend';
 
 import { globalStore } from './api';
 import { setErrorAC } from './Error/actionCreators';
 import { INetworkError } from './Error/types';
-import { IAction } from 'redux-micro-frontend';
 
 export const axiosInst = axios.create({
   baseURL: 'http://localhost:5000',
@@ -18,7 +18,7 @@ axiosInst.interceptors.response.use(
       type: error.response?.statusText || 'Ooops! Unknown error.',
     };
     globalStore.DispatchLocalAction('API', setErrorAC(errorData));
-    globalStore.DispatchGlobalAction('API', push('/error') as IAction)
+    globalStore.DispatchGlobalAction('API', push('/error') as IAction);
     return Promise.reject(error);
   },
 );
