@@ -1,10 +1,15 @@
-import React from 'react';
-import { IApiState, INetworkError } from '../types';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { globalStore } from '../globalStoreUtils';
+
+import { IApiState, INetworkError } from '../types';
+import { clearErrorState, globalStore } from '../globalStoreUtils';
 
 const ErrorPage: React.FC = () => {
   const { code, type }: INetworkError = (globalStore.GetPartnerState('API') as IApiState).Error;
+
+  useEffect(() => {
+    return clearErrorState
+  })
 
   return (
     <div className="ErrorPageWrapper">

@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios';
+import { push } from '@lagunovsky/redux-react-router';
 
 import { globalStore } from './api';
 import { setErrorAC } from './Error/actionCreators';
@@ -16,6 +17,7 @@ axiosInst.interceptors.response.use(
       type: error.response?.statusText || 'Ooops! Unknown error.',
     };
     globalStore.DispatchLocalAction('API', setErrorAC(errorData));
+    globalStore.DispatchGlobalAction('API', push('/error'))
     return Promise.reject(error);
   },
 );
